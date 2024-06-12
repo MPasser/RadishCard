@@ -8,6 +8,8 @@ namespace Ressap.RadishCard {
             this.RegisterModel<IGameInfoModel>(new DefaultGameInfoModel());
 
             this.RegisterSystem<IDeckSystem>(new DefaultDeckSystem());
+            this.RegisterSystem<IGameSaveSystem>(new DefaultGameSaveSystem());
+            this.RegisterSystem<IStrategySystem>(new DefaultStrategySystem());
         }
     }
 }
