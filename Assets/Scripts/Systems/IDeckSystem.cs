@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using QFramework;
+using Ressap.Utils;
 
 namespace Ressap.RadishCard {
     public interface IDeckSystem : ISystem {
         List<CardData> MainDeckDatas { get; }
         List<CardData> WasteDeckDatas { get; }
+        CardData[] PlayedDeckDatas { get; }
 
         List<CardData>[] HandCardDatasArr { get; }
 
@@ -25,6 +27,7 @@ namespace Ressap.RadishCard {
     public class DefaultDeckSystem : AbstractSystem, IDeckSystem {
         public List<CardData> MainDeckDatas { get; set; }
         public List<CardData> WasteDeckDatas { get; set; }
+        public CardData[] PlayedDeckDatas { get; set; }
 
         private List<CardData> playerHandDatas;
         private List<CardData> leftComHandDatas;
@@ -57,6 +60,7 @@ namespace Ressap.RadishCard {
         public void ResetMainDeck() {
             MainDeckDatas.Clear();
             WasteDeckDatas.Clear();
+            PlayedDeckDatas.Fill(null);
 
             foreach (var h in HandCardDatasArr) {
                 h.Clear();
@@ -160,6 +164,7 @@ namespace Ressap.RadishCard {
         public void SaveDeckInfos() {
             storageUtility.Save<List<CardData>>(nameof(MainDeckDatas), MainDeckDatas, save_path);
             storageUtility.Save<List<CardData>>(nameof(WasteDeckDatas), WasteDeckDatas, save_path);
+            storageUtility.Save<CardData[]>(nameof(PlayedDeckDatas), PlayedDeckDatas, save_path);
 
             storageUtility.Save<List<CardData>>(nameof(playerHandDatas), playerHandDatas, save_path);
             storageUtility.Save<List<CardData>>(nameof(leftComHandDatas), leftComHandDatas, save_path);
@@ -170,6 +175,7 @@ namespace Ressap.RadishCard {
         private void loadDeckInfos() {
             MainDeckDatas = storageUtility.Load<List<CardData>>(nameof(MainDeckDatas), save_path, new List<CardData>());
             WasteDeckDatas = storageUtility.Load<List<CardData>>(nameof(WasteDeckDatas), save_path, new List<CardData>());
+            PlayedDeckDatas = storageUtility.Load<CardData[]>(nameof(PlayedDeckDatas), save_path, new CardData[4]);
 
             HandCardDatasArr[0] = playerHandDatas = storageUtility.Load<List<CardData>>(nameof(playerHandDatas), save_path, new List<CardData>());
             HandCardDatasArr[1] = leftComHandDatas = storageUtility.Load<List<CardData>>(nameof(leftComHandDatas), save_path, new List<CardData>());

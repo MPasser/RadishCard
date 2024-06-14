@@ -10,6 +10,7 @@ namespace Ressap.RadishCard {
             this.RegisterSystem<IDeckSystem>(new DefaultDeckSystem());
             this.RegisterSystem<IGameSaveSystem>(new DefaultGameSaveSystem());
             this.RegisterSystem<IStrategySystem>(new DefaultStrategySystem());
+            this.RegisterSystem<IUISystem>(new DefaultUISystem());
         }
     }
 }

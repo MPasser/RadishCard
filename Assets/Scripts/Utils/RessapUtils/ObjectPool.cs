@@ -17,6 +17,8 @@ namespace Ressap.Utils {
                 obj = InstantiateObj();
             }
 
+            onInstantiate(obj);
+
             return obj;
         }
 

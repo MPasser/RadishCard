@@ -9,7 +9,7 @@ namespace Ressap.RadishCard {
         }
 
         protected override void OnExecute() {
-            if (Const.PLAYER_INDEX == playerID) {
+            if (Const.SELF_INDEX == playerID) {
                 this.SendEvent<AskPlayerPlayEvt>();
             } else {
                 CardData cardData = this.GetSystem<IStrategySystem>().AskPlay(playerID);
